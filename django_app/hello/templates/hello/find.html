@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css" crossorigin="anonymous">
+    <title>{{title}}</title>
+</head>
+<body class="container">
+    <h1 class="display-4 text-primary mb-4">{{title}}</h1>
+    <p>{{message}}</p>
+    <form action="{% url 'find' %}" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="検索">
+    </form>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+            <th>メール</th>
+        </tr>
+        {% for item in data %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}(){{ item.age }}</td>
+            <td>{{ item.mail }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'hello/css/style.css' %}"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css" crossorigin="anonymous">
+    <title>{{title}}</title>
+</head>
+<body class="container">
+    <h1 class="display-4 text-primary mb-4">{{title}}</h1>
+    <p class="h6 m5-4">{{message|safe}}</p>
+    <!-- <p>{{ msg|safe }}</p> -->
+    <!-- <form action="a" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="click">
+    </form> -->
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+            <th>年齢</th>
+            <th>メール</th>
+            <th>誕生日</th>
+            <th>メッセージ</th>
+        </tr>
+    {% for item in data %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.mail}}</td>
+            <td>{{item.birthday}}</td>
+            <td>
+                <ul>
+                    {% for ob in item.message_set.all %}
+                        <li>{{ob.title}}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <ul class="pagination justify-content-center">
+        {% if data.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="{% url 'index' %}">&laquo; 最初</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="{% url 'index' %}{{data.previous_page_number}}">&laquo; 戻る</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link">&laquo; 最初</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link">&laquo; 戻る</a>
+        </li>
+        {% endif %}
+        <li class="page-item">
+            <a class="page-link">{{data.number}}/{{data.paginator.num_pages}}</a>
+        </li>
+        {% if data.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{% url 'index' %}{{data.next_page_number}}">進む &raquo;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="{% url 'index' %}{{data.paginator.num_pages}}">最後 &raquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link">進む &raquo;</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link">最後 &raquo;</a>
+        </li>
+        {% endif %}
+    </ul>
+
+    <!-- <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>GENDER</th>
+            <th>MAIL</th>
+            <th>AGE</th>
+            <th>BIRTHDAY</th>
+        </tr>
+        {% for item in data %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>
+                {% if item.gender == False %}male{% endif %}
+                {% if item.gender == True %}female{% endif %}
+            </td>
+            <td>{{item.mail}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.birthday}}</td>
+        </tr>
+        {% endfor %}
+    </table> -->
+</body>
+</html>

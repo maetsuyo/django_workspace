@@ -1,0 +1,18 @@
+djangoのインストール
+> pip install django
+※ バージョンの指定
+> pip install django==バージョン
+
+Djangoプロジェクトの作り方
+> django-admin startproject プロジェクト名
+
+django簡易サーバーの起動
+> py manage.py runserver
+
+djangoアプリケーションの作成
+> py manage.py startapp アプリケーション名
+
+urls.pyの設定
+
+アプリケーションのrequest
+localhost:8000/アプリケーション名

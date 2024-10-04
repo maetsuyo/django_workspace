@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css" crossorigin="anonymous">
+    <title>{{title}}</title>
+</head>
+<body class="container">
+    <h1 class="display-4 text-primary mb-4">{{title}}</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <td>{{ obj.id }}</td>
+        </tr>
+        <tr>
+            <th>名前</th>
+            <td>{{ obj.name }}</td>
+        </tr>
+        <tr>
+            <th>性別</th>
+            <td>
+                {% if obj.gender == False %}male{% endif %}
+                {% if obj.gender == True %}female{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>メールアドレス</th>
+            <td>{{ obj.mail }}</td>
+        </tr>
+        <tr>
+            <th>誕生日</th>
+            <td>{{ obj.birthday }}</td>
+        </tr>
+
+        <form action="{% url 'delete' id %}" method="POST">
+            {% csrf_token %}
+            <tr><th><td>
+                <input type="submit" value="click" class="btn btn-primary">
+            </td></th></tr>
+        </form>
+    </table>
+</body>
+</html>

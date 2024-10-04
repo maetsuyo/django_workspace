@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'hello/css/style.css' %}"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css" crossorigin="anonymous">
+    <title>一覧</title>
+</head>
+<body class="container">
+    <h1 class="display-4 text-primary mb-4">一覧</h1>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>名前</th>
+        </tr>
+        {% for item in object_list %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td><a href="/hello/detail/{{item.id}}">詳細</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
