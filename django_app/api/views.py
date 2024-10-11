@@ -11,6 +11,7 @@ from .models import Message2, Good2
 import json
 
 page_max = 10
+
 # Create your views here.
 @login_required(login_url="/admin/login/")
 def index(request):
